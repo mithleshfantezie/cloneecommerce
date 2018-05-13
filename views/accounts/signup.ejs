@@ -1,0 +1,40 @@
+<% layout('Layout') -%>
+
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+    <% if (errors.length > 0) { %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <%= errors %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    <% } %>
+
+    <form action="/register" method="post">
+
+      <h1>SignUp here....</h1>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter Name" required/>
+      </div>
+      <div class="form-group">
+        <label for="name">Email:</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter Email" required/>
+      </div>
+      <div class="form-group">
+        <label for="name">Password:</label>
+        <input type="password" name="password" class="form-control" placeholder="**********" required/ >
+      </div>
+      <input class="btn btn-success" type="submit" value="Signup">
+
+
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+  $('.alert').alert()
+</script>

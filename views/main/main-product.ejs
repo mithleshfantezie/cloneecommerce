@@ -1,0 +1,77 @@
+<% layout('layout') -%>
+ <div class="jumbotron">
+  <div class="container">
+    <h1 class="text-center">Find Your Favourite Product</h1>
+    <p class="text-center">Search many of Ecommerce's products </p>
+    <div class="row">
+
+          <div class="col-md-12 col-md-offset">
+
+            <div class=" col-md-6 input-group" style="float:right;">
+
+              <input id="search" type="text" name="search_term" class="form-control input-lg">
+              <span class="input-group-btn">
+              <button id="btnSearch" type="submit" class="btn  btn-lg" > <i class="fa fa-search"></i> </button>
+              </span>
+            </div>
+
+          </div>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row" id="searchResult">
+
+      <% for (var i = 0; i < products.length; i++) { %>
+      <div class="col-md-4">
+        <a class="card-link" href="/product/<%= products[i]._id %>">
+          <div class="img-thumbnail">
+            <img class="card-img-top" src="<%= products[i].image %>" alt="">
+
+            <div class="caption">
+              <br />
+              <button type="button" class="btn btn-primary">
+               <%= products[i].name %>
+             </button><br>
+            <span class="badge badge-pill badge-success"><%= products[i].category.name %></span>
+              <p></p>
+              <p><h5><span class="badge badge-secondary">$<%= products[i].price %></span></h5></p>
+
+            </div>
+          </div>
+        </a>
+        <br />
+      </div>
+
+      <% } %>
+
+      <ul class="pagination pagination-sm">
+        <!-- <li class="page-item disabled">
+          <a class="page-link" href="/page/" tabindex="-1">Previous</a>
+        </li> -->
+          <% for(var i =1 ; i<= pages;i++) { %>
+            <%if (i=== 1) { %>
+
+              <li class="page-item"><a class="page-link" href="/"><%= i %></a></li>
+
+
+              <% } else { %>
+                  <li class="page-item"><a class="page-link" href="/page/<%= i %>"><%= i %></a></li>
+              <% } %>
+
+                <% } %>
+                <!-- <li class="page-item">
+      <a class="page-link" href="/page/<%= i %>">Next</a>
+    </li> -->
+
+
+        </ul>
+
+      </ul>
+    </div>
+
+  </div>
+
+
+</div>

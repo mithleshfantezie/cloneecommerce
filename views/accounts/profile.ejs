@@ -1,0 +1,78 @@
+<% layout('layout') -%>
+<% if (success.length > 0) { %>
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong><%= success %>!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% } %>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <a href="/edit-profile"><span class="badge badge-warning">Edit</span></a>
+
+    </div>
+<div class="col-sm-6 col-md-4">
+
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top rounded-circle" src="<%= user.profile.picture %>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Profile Information</h5>
+    </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name: <%= user.profile.name %></li>
+    <li class="list-group-item">Email: <%= user.email %></li>
+    <li class="list-group-item"><%if (user.profile.address == "" || typeof user.profile.address === 'undefined') { %>
+    <p>Address: <span style="color: #c0392b; font-weight:bold;">You have no address.</span></p>
+
+    <% } else { %>
+    <p>Address: <%= user.profile.address %> </p>
+    <% } %></li>
+  </ul>
+
+</div>
+</div>
+<div class="col-sm-12 col-md-8">
+  <div class="card" style="width: 18rem;">
+    <div class="card-header">
+      History
+    </div>
+    <% if(user.history.length ==0) { %>
+      <ul class="list-group list-group-flush">
+    <li class="list-group-item"><span style="color: #c0392b; font-weight:bold;">No Item Purchased Yet.</span></p></li>
+
+  </ul>
+
+      <% } %>
+
+    <% if(user.history.length !==0) { %>
+
+    <table class="table table-striped sticky-header">
+      <thead>
+        <tr>
+          <th>Item's Name</th>
+          <th>Paid: </th>
+        </tr>
+        <tbody>
+
+            <% for(var i = 0; i < user.history.length; i++) { %>
+              <td><%= user.history[i].item.name %></td>
+                <td>$<%= user.history[i].paid %></td>
+                <tr>
+            <% } %>
+        </tbody>
+      </thead>
+
+    </table>
+    <% } %>
+
+  </div>
+
+
+</div>
+  </div>
+</div>

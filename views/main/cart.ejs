@@ -1,0 +1,111 @@
+<% layout('layout') -%>
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+    <% if (remove.length > 0) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= remove %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    <% } %>
+
+<% if (foundcart.items.length == 0) { %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <i class="fa fa-cart-arrow-down" style="font-size:100px;"></i>
+      <h5><strong>Add some tem in the cart !!</strong></h5>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+  <%  }  else { %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <% for(var i = 0; i < foundcart.items.length; i++) { %>
+        <div class="list-group">
+          <span class="list-group-item">
+            <div class="row">
+              <div class="col-md-3">
+                <span> <img src="<%= foundcart.items[i].item.image %>" class="product-image" alt=""> </span>
+
+              </div>
+              <div class="col-md-6">
+                  <p class="list-group-item-heading"><%= foundcart.items[i].item.name %></p>
+              </div>
+
+              <div class="col-md-3">
+                <p>Quantity: <%= foundcart.items[i].quantity %></p>
+                <p>Total Price: $<%= foundcart.items[i].price%></p>
+
+                <form  method="post" action="/remove" >
+                  <input type="hidden" name="item" value="<%= foundcart.items[i]._id %>">
+                  <input type="hidden" name="price" value="<%= foundcart.items[i].item.price * foundcart.items[i].quantity %>">
+                  <button type="submit" class="btn btn-outline-danger" >Remove</button>
+
+                </form>
+              </div>
+
+            </div>
+          </span>
+
+        </div>
+      <% } %>
+
+    </div>
+
+
+    <div class="col-md-12">
+      <div class="list-group">
+        <span class="list-group-item">
+            <h4>Total: $ <span class="totalPrice"><%= foundcart.total %></span> </h4>
+
+            <div class="form-group">
+
+
+              <form action="/charge" method="post">
+                <input type="hidden" name="amount" value="<%= foundcart.total %>">
+                <script type="text/javascript" src="//checkout.stripe.com/v2/checkout.js",
+                      class="stripe-button"
+                      data-key=	"pk_test_18CJAH7YQOM8gGV6uuV3kqbE"
+                      data-locale="auto"
+                      data-description="Payment"
+                      data-amount="<%= foundcart.total*100 %> ">
+
+                </script>
+
+              </form>
+
+            </div>
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<% } %>
